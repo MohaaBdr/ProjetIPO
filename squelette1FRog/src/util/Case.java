@@ -10,4 +10,8 @@ public class Case {
 		this.ord = ord;
 	}
 
+	public String toString(){
+		return "absc = " + this.absc + " " + "ord = " + this.ord;
+	}
+
 }

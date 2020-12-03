@@ -5,6 +5,10 @@ import java.util.Random;
 
 import graphicalElements.Element;
 import graphicalElements.IFroggerGraphics;
+import infini.EnvInf;
+import infini.FrogInf;
+import util.Case;
+import util.Direction;
 
 public class Game {
 
@@ -12,16 +16,17 @@ public class Game {
 
 	// Caracteristique de la partie
 	public final int width;
-	public final int height;
+	public final int defaultHeight;
+	public int height;
+	public int maxHeight;
 	public final int minSpeedInTimerLoops;
 	public final double defaultDensity;
 
 	// Lien aux objets utilis�s
 	private IEnvironment environment;
 	private IFrog frog;
+	//private FrogInf frogInf;
 	private IFroggerGraphics graphic;
-
-
 
 	/**
 	 * 
@@ -41,6 +46,8 @@ public class Game {
 		this.graphic = graphic;
 		this.width = width;
 		this.height = height;
+		this.defaultHeight = height;
+		this.maxHeight = height;
 		this.minSpeedInTimerLoops = minSpeedInTimerLoop;
 		this.defaultDensity = defaultDensity;
 	}
@@ -78,8 +85,9 @@ public class Game {
 	 * @return true si le partie est perdue
 	 */
 	public boolean testLose() {
-		if(!environment.isSafe(frog.getPosition())){
-			graphic.endGameScreen("Défaite");
+		if(!environment.isSafe(frog.getPosition(), frog.getCompteur())){
+			int score = maxHeight - defaultHeight;
+			graphic.endGameScreen("Défaite ! " + "Votre Score : " + score );
 			return true;
 		}
 		return false;
@@ -91,12 +99,20 @@ public class Game {
 	 * 
 	 * @return true si la partie est gagn�e
 	 */
-	public boolean testWin() {
+/*	public boolean testWin() {
 		if(environment.isWinningPosition(frog.getPosition())){
 			graphic.endGameScreen("Victoire");
 			return true;
 		}
 		return false;
+	}*/
+
+	public void infini(){
+		this.environment.infini();
+	}
+
+	public void deplaceOrdCar(Direction d){
+		environment.deplaceOrdCar(d);
 	}
 
 	/**
@@ -108,7 +124,7 @@ public class Game {
 		environment.update();
 		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
 		testLose();
-		testWin();
+		//testWin();
 	}
 
 }
