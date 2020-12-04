@@ -30,7 +30,21 @@ public interface IEnvironment {
 	 */
 	public void update();
 
+	/**
+	 * Vide l'arrayList roadLines
+	 */
+	public void clearLanes();
+
+	/**
+	 * Ajoute une voie à l'arrayList roadLines
+	 * Incrémente la valeur de la hauteur maximale atteinte
+	 */
 	public void infini();  //////////////////////TODO
 
+	/**
+	 * Incrémente ou décremente l'ordonnées des voies de roadLines en fonction de la direction
+	 *
+	 * @param d la Direction de la grenouille
+	 */
 	public void deplaceOrdCar(Direction d);  /////////////////////TODO
 }

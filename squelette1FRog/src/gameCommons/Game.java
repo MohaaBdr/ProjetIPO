@@ -1,6 +1,8 @@
 package gameCommons;
 
 import java.awt.Color;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Random;
 
 import graphicalElements.Element;
@@ -16,16 +18,16 @@ public class Game {
 
 	// Caracteristique de la partie
 	public final int width;
-	public final int defaultHeight;
-	public int height;
-	public int maxHeight;
+	public final int defaultHeight;         //hauteur par défaut
+	public int height;         //hauteur actuelle
+	public int maxHeight;         //hauteur maximale atteinte
 	public final int minSpeedInTimerLoops;
 	public final double defaultDensity;
+	private long timer;         //compte le temps passé en secondes
 
 	// Lien aux objets utilis�s
 	private IEnvironment environment;
 	private IFrog frog;
-	//private FrogInf frogInf;
 	private IFroggerGraphics graphic;
 
 	/**
@@ -50,6 +52,7 @@ public class Game {
 		this.maxHeight = height;
 		this.minSpeedInTimerLoops = minSpeedInTimerLoop;
 		this.defaultDensity = defaultDensity;
+		this.timer = System.nanoTime();
 	}
 
 	/**
@@ -86,8 +89,11 @@ public class Game {
 	 */
 	public boolean testLose() {
 		if(!environment.isSafe(frog.getPosition(), frog.getCompteur())){
+			environment.clearLanes();    //pour avoir un affichage des secondes sans superpositions
 			int score = maxHeight - defaultHeight;
-			graphic.endGameScreen("Défaite ! " + "Votre Score : " + score );
+			long f = System.nanoTime();
+			timer =  (f - timer)/1000000000;
+			graphic.endGameScreen("Défaite ! " + "Votre Score : " + score + " Temps : " + timer + " secondes");
 			return true;
 		}
 		return false;
@@ -99,18 +105,28 @@ public class Game {
 	 * 
 	 * @return true si la partie est gagn�e
 	 */
-/*	public boolean testWin() {
+	public boolean testWin() {
 		if(environment.isWinningPosition(frog.getPosition())){
 			graphic.endGameScreen("Victoire");
 			return true;
 		}
 		return false;
-	}*/
+	}
 
+	/**
+	 * Ajoute une voie à l'arrayList roadLines
+	 * Incrémente la valeur de la hauteur maximale atteinte
+	 */
 	public void infini(){
 		this.environment.infini();
 	}
 
+
+	/**
+	 * Incrémente ou décremente l'ordonnées des voies de roadLines en fonction de la direction
+	 *
+	 * @param d la Direction de la grenouille
+	 */
 	public void deplaceOrdCar(Direction d){
 		environment.deplaceOrdCar(d);
 	}
@@ -124,7 +140,7 @@ public class Game {
 		environment.update();
 		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
 		testLose();
-		//testWin();
+		testWin();
 	}
 
 }

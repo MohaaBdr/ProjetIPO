@@ -12,16 +12,20 @@ public class Environment implements IEnvironment {
     private ArrayList<Lane> roadLines;
     private Game game;
 
+    /**
+     *
+     * @param game la partie de jeu
+     */
     public Environment(Game game){
         this.game = game;
         this.roadLines = new ArrayList();
         this.roadLines.add(new Lane(game, 0, 0.0D));
 
         for(int i = 1; i < game.height - 1; ++i) {
-            this.roadLines.add(new Lane(game, i,  game.randomGen.nextDouble()%0.3 + 0.1 ));
+            this.roadLines.add(new Lane(game, i,  (game.randomGen.nextInt(5)/100.0)+0.01));
         }
 
-        this.roadLines.add(new Lane(game, game.height - 1, 0.0D));
+        this.roadLines.add(new Lane(game, game.defaultHeight, 0.0D));
     }
 
 
@@ -46,11 +50,15 @@ public class Environment implements IEnvironment {
      */
    @Override
     public boolean isWinningPosition(Case c) {
-        if(c.ord == game.height-1){
+        if(c.ord == game.defaultHeight){
             return true;
         }else{
             return false;
         }
+    }
+
+    public void clearLanes(){
+        this.roadLines.clear();
     }
 
     /**

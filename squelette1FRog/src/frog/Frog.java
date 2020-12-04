@@ -11,6 +11,11 @@ public class Frog implements IFrog {
 	private Case position;
 	private Direction direction;
 
+
+	/**
+	 *
+	 * @param game la partie de jeu
+	 */
 	public Frog(Game game){
 		this.game = game;
 		this.direction = Direction.up;
@@ -29,16 +34,21 @@ public class Frog implements IFrog {
 	}
 
 	public int getCompteur() {
-		return this.position.ord;
+		return 0;
 	}  /////////////////////////////////////////////TODO
 
 
 	@Override
 	public void move(Direction key) {
 		if((key == Direction.up) && (position.ord < game.height-1)){
+			this.game.height++;
+			if (this.game.height>=this.game.maxHeight) {
+				this.game.maxHeight++;
+			}
 			Case newPos = new Case(position.absc, position.ord+1);
 			position = newPos;
 		}else if((key == Direction.down) && (position.ord > 0)){
+			this.game.height--;
 			Case newPos = new Case(position.absc, position.ord-1);
 			position = newPos;
 		}else if((key == Direction.left) && (position.absc > 0)){

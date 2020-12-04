@@ -16,6 +16,15 @@ public class Lane {
 	private double density;
 	private int horloge = 0;
 
+
+	/**
+	 *
+	 * @param game la partie de jeu
+	 *
+	 * @param ordonnee l'ordonnée de la voie
+	 *
+	 * @param density la densité de la voie
+	 */
 	public Lane(Game game, int ordonnee, double density){
 		this.game = game;
 		this.ord = ordonnee;
@@ -29,6 +38,10 @@ public class Lane {
 		}
 	}
 
+	/**
+	 * Deplace horizontalement les voitures et les retirent si besoin
+	 * @param b
+	 */
 	public void deplaceCar(boolean b){
 		for(Car car : this.cars){
 			car.deplace(b);
@@ -36,6 +49,10 @@ public class Lane {
 		enleveCar();
 	}
 
+	/**
+	 * Deplace verticalement les voitures en fonction de la direction
+	 * @param d la direction
+	 */
 	public void deplaceOrdCar(Direction d){
 		for(Car car : this.cars){
 			car.deplaceOrd(d);
@@ -49,6 +66,9 @@ public class Lane {
 		}
 	}
 
+	/**
+	 * Retire les voitures qui sont en dehors de la fenêtre de jeu
+	 */
 	public void enleveCar(){
 		for(Car c : cars){
 			if(!c.estDedans()){
@@ -57,6 +77,11 @@ public class Lane {
 		}
 	}
 
+	/**
+	 * Verifie une voiture est sur la case c
+	 * @param c la case
+	 * @return
+	 */
 	public boolean isSafe(Case c) {   //verifie si une des voitures de la liste est sur la case c
 		for (Car car : this.cars) {
 			if (car.verifCase(c)) {
@@ -97,6 +122,12 @@ public class Lane {
 			return new Case(game.width, ord);
 	}
 
+	/**
+	 * Toutes les voitures se déplacent d'une case au bout d'un nombre "tic d'horloge" égal à leur vitesse
+	 * cette méthode est appelée à chaque tic d'horloge
+	 * Les voitures sont ajoutées à l'interface graphique même quand elles ne bougent pas
+	 * A chaque tic d'horloge, une voiture peut être ajoutée
+	 */
 	public void update() {
 		horloge++;
 		if(this.horloge <= this.speed){
@@ -107,14 +138,6 @@ public class Lane {
 			horloge=0;
 
 		}
-		// Toutes les voitures se d�placent d'une case au bout d'un nombre "tic
-		// d'horloge" �gal � leur vitesse
-		// Notez que cette m�thode est appel�e � chaque tic d'horloge
-
-		// Les voitures doivent etre ajoutes a l interface graphique meme quand
-		// elle ne bougent pas
-
-		// A chaque tic d'horloge, une voiture peut �tre ajout�e
 
 	}
 
