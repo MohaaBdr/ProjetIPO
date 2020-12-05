@@ -9,10 +9,10 @@ import util.Direction;
 
 
 public class Car {
-    private Game game;
+    private final Game game;
     private Case leftPosition;
-    private boolean leftToRight;
-    private int length;
+    private final boolean leftToRight;
+    private final int length;
     private final Color colorLtR = Color.BLACK;
     private final Color colorRtL = Color.BLUE;
 
@@ -41,11 +41,7 @@ public class Car {
     public boolean verifCase(Case c) {
         if (this.leftPosition.ord != c.ord) {
             return false;
-        } else if (c.absc >= this.leftPosition.absc && c.absc < (this.leftPosition.absc + this.length)) {
-            return true;
-        } else {
-            return false;
-        }
+        } else return c.absc >= this.leftPosition.absc && c.absc < (this.leftPosition.absc + this.length);
     }
 
     /**
@@ -53,10 +49,7 @@ public class Car {
      * @return
      */
     public boolean estDedans() {
-        if(this.leftPosition.absc + this.length > 0 || this.leftPosition.absc < this.game.width){
-            return true;
-        }
-        return false;
+        return this.leftPosition.absc + this.length > 0 || this.leftPosition.absc < this.game.width;
     }
 
     /**
@@ -78,7 +71,7 @@ public class Car {
     }
 
     /**
-     * Déplace verticalement une voiture en fonction de sa direction
+     * Déplace verticalement une voiture en fonction de la direction de la grenouille
      * @param d la direction choisie
      */
     public void deplaceOrd(Direction d, int var){

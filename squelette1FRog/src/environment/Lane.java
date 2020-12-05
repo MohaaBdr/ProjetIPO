@@ -1,19 +1,18 @@
 package environment;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import util.Case;
 import gameCommons.Game;
 import util.Direction;
 
 public class Lane {
-	private Game game;
+	private final Game game;
 	private int ord;
-	private int speed;
-	private ArrayList<Car> cars = new ArrayList<>();
-	private boolean leftToRight;
-	private double density;
+	private final int speed;
+	private ArrayList<Car> cars ;
+	private final boolean leftToRight;
+	private final double density;
 	private int horloge = 0;
 
 	/**

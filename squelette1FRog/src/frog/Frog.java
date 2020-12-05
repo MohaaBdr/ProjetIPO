@@ -35,7 +35,7 @@ public class Frog implements IFrog {
 	@Override
 	public int getCompteur() {
 		return 0;
-	}  /////////////////////////////////////////////TODO
+	}
 
 	public void faitGlisser() {
 		if (game.isGlisse(position)) {

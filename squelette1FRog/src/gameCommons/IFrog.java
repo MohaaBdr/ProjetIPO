@@ -29,6 +29,9 @@ public interface IFrog {
 	 */
 	public int getCompteur();
 
+	/**
+	 * Fait glisser la grenouille
+	 */
 	public void faitGlisser();
 
 
