@@ -1,6 +1,9 @@
 package environment;
 
 import java.util.ArrayList;
+
+import caseSpe.Glisse;
+import caseSpe.Trap;
 import environment.Lane;
 import util.Case;
 import gameCommons.Game;
@@ -11,7 +14,8 @@ public class Environment implements IEnvironment {
 
     private ArrayList<Lane> roadLines;
     private Game game;
-
+    private ArrayList<Trap> traps;
+    private ArrayList<Glisse> casesGlisse;
     /**
      *
      * @param game la partie de jeu
@@ -26,6 +30,24 @@ public class Environment implements IEnvironment {
         }
 
         this.roadLines.add(new Lane(game, game.defaultHeight, 0.0D));
+
+        ArrayList<Case> save = new ArrayList<Case>();
+        this.traps = new ArrayList<>();
+        for(int i=3; i < 7 + game.randomGen.nextInt(4); i++){
+            save.add(new Case (game.randomGen.nextInt(game.width -1), game.randomGen.nextInt(game.defaultHeight -4) +3));
+            traps.add(new Trap(game, save.get(i-3)));
+        }
+
+        this.casesGlisse = new ArrayList<>();
+        for(int i=3; i < 7 + game.randomGen.nextInt(4); i++){
+            Case test = new Case (game.randomGen.nextInt(game.width -1), game.randomGen.nextInt(game.defaultHeight -5) +3);
+            for(Case c : save){
+                while(test == c){
+                    test = new Case (game.randomGen.nextInt(game.width -1), game.randomGen.nextInt(game.defaultHeight -5) +3);
+                }
+            }
+            casesGlisse.add(new Glisse(game, test));
+        }
     }
 
 
@@ -39,8 +61,14 @@ public class Environment implements IEnvironment {
      */
     @Override
     public boolean isSafe(Case c, int compt) {
+        for(Trap t : traps){
+            if (t.verifCase(c)){
+                return false;
+            }
+        }
         return (this.roadLines.get(c.ord)).isSafe(c);
     }
+
 
     /**
      * Teste si la case est une case d'arrivee
@@ -50,15 +78,11 @@ public class Environment implements IEnvironment {
      */
    @Override
     public boolean isWinningPosition(Case c) {
-        if(c.ord == game.defaultHeight){
+        if(c.ord == game.height-1){
             return true;
         }else{
             return false;
         }
-    }
-
-    public void clearLanes(){
-        this.roadLines.clear();
     }
 
     /**
@@ -69,11 +93,37 @@ public class Environment implements IEnvironment {
         for(Lane l : this.roadLines){
             l.update();
         }
+
+        for(Trap t : traps){
+            t.addToGraphics();
+        }
+
+        for(Glisse g : casesGlisse){
+            g.addToGraphics();
+        }
+    }
+
+    @Override
+    public void clearEnv (){
+        this.traps.clear();
+        this.casesGlisse.clear();
+        this.roadLines.clear();
+    }
+
+    public boolean isGlisse(Case c){
+        for(Glisse g : casesGlisse){
+            if(g.verifCase(c)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void infini(){}  ////////////////TODO
 
-    public void deplaceOrdCar(Direction d){}  ////////////////TODO
+    public void deplaceOrdCar(Direction d, int var){}  ////////////////TODO
+
+    public void infiniSpe(){} ////////////////TODO
 
 
 }

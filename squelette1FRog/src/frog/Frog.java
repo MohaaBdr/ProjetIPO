@@ -11,7 +11,6 @@ public class Frog implements IFrog {
 	private Case position;
 	private Direction direction;
 
-
 	/**
 	 *
 	 * @param game la partie de jeu
@@ -33,9 +32,17 @@ public class Frog implements IFrog {
 		return this.direction;
 	}
 
+	@Override
 	public int getCompteur() {
 		return 0;
 	}  /////////////////////////////////////////////TODO
+
+	public void faitGlisser() {
+		if (game.isGlisse(position)) {
+			Case newPos = new Case(position.absc, position.ord + 2);
+			position = newPos;
+		}
+	}
 
 
 	@Override

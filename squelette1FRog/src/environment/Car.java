@@ -7,6 +7,7 @@ import gameCommons.Game;
 import graphicalElements.Element;
 import util.Direction;
 
+
 public class Car {
     private Game game;
     private Case leftPosition;
@@ -17,12 +18,9 @@ public class Car {
 
     /**
      *
-     * @param game
-     *            la partie du jeu
-     * @param pos
-     *            la position de la voiture
-     * @param dir
-     *            la direction de la voiture
+     * @param game la partie de jeu
+     * @param pos la position de la voiture
+     * @param dir la direction de la voiture
      */
     public Car(Game game, Case pos, boolean dir){
         this.game = game;
@@ -36,7 +34,7 @@ public class Car {
     }
 
     /**
-     * Verifie si une voiture est sur une case
+     * Vérifie si une voiture est sur une case
      * @param c la case
      * @return
      */
@@ -50,9 +48,8 @@ public class Car {
         }
     }
 
-
     /**
-     * Verifie si une voiture est dans la fênetre de jeu
+     * Vérifie si une voiture est dans la fenêtre de jeu
      * @return
      */
     public boolean estDedans() {
@@ -63,7 +60,7 @@ public class Car {
     }
 
     /**
-     * Deplace horizontalement une voiture en fonction de sa direction si b est vrai
+     * Déplace horizontalement une voiture en fonction de sa direction si b est vrai
      * @param b
      */
     public void deplace(boolean b){
@@ -81,8 +78,8 @@ public class Car {
     }
 
     /**
-     * Deplace verticalement une voiture en fonction de sa direction
-     * @param d la direction
+     * Déplace verticalement une voiture en fonction de sa direction
+     * @param d la direction choisie
      */
     public void deplaceOrd(Direction d){
         int sens;  //1 si de gauche vers le bas, -1 si vers le haut

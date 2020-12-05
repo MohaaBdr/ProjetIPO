@@ -1,8 +1,6 @@
 package gameCommons;
 
 import java.awt.Color;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.Random;
 
 import graphicalElements.Element;
@@ -11,6 +9,7 @@ import infini.EnvInf;
 import infini.FrogInf;
 import util.Case;
 import util.Direction;
+import caseSpe.Trap;
 
 public class Game {
 
@@ -18,17 +17,20 @@ public class Game {
 
 	// Caracteristique de la partie
 	public final int width;
-	public final int defaultHeight;         //hauteur par défaut
-	public int height;         //hauteur actuelle
-	public int maxHeight;         //hauteur maximale atteinte
+	public final int defaultHeight; //hauteur par défault
+	public int height; //hauteur actuelle
+	public int maxHeight; //hauteur maximale atteinte
 	public final int minSpeedInTimerLoops;
 	public final double defaultDensity;
-	private long timer;         //compte le temps passé en secondes
+	private long timer; //compte le temps passé en secondes
+
 
 	// Lien aux objets utilis�s
 	private IEnvironment environment;
-	private IFrog frog;
+	public IFrog frog;
+	//private FrogInf frogInf;
 	private IFroggerGraphics graphic;
+	public Trap trap;
 
 	/**
 	 * 
@@ -53,7 +55,17 @@ public class Game {
 		this.minSpeedInTimerLoops = minSpeedInTimerLoop;
 		this.defaultDensity = defaultDensity;
 		this.timer = System.nanoTime();
+		//this.trap = new Trap(this, new Case (3,2));
 	}
+
+	/**
+	 * Lie l'objet trap � la partie
+	 *
+	 * @param trap
+	 */
+	/*public void setTrap(Trap trap){
+		this.trap = trap;
+	}*/
 
 	/**
 	 * Lie l'objet frog � la partie
@@ -89,11 +101,11 @@ public class Game {
 	 */
 	public boolean testLose() {
 		if(!environment.isSafe(frog.getPosition(), frog.getCompteur())){
-			environment.clearLanes();    //pour avoir un affichage des secondes sans superpositions
-			int score = maxHeight - defaultHeight;
+			environment.clearEnv();
 			long f = System.nanoTime();
-			timer =  (f - timer)/1000000000;
-			graphic.endGameScreen("Défaite ! " + "Votre Score : " + score + " Temps : " + timer + " secondes");
+			long temps =  (f - timer)/1000000000;
+			int score = maxHeight - defaultHeight;
+			graphic.endGameScreen("Défaite ! " + "Votre Score : " + score + " temps : " + temps + " secs") ;
 			return true;
 		}
 		return false;
@@ -114,21 +126,27 @@ public class Game {
 	}
 
 	/**
-	 * Ajoute une voie à l'arrayList roadLines
+	 * Ajoute une voie à l'arraylist RoadLines
+	 * Ajoute une case piège
 	 * Incrémente la valeur de la hauteur maximale atteinte
 	 */
 	public void infini(){
+
 		this.environment.infini();
+		this.environment.infiniSpe();
 	}
 
+	public boolean isGlisse(Case c){
+		return environment.isGlisse(c);
+	}
 
 	/**
-	 * Incrémente ou décremente l'ordonnées des voies de roadLines en fonction de la direction
+	 * Incrémente ou décrémente l'ordonnée des voies de roadLines en fonction de d
 	 *
-	 * @param d la Direction de la grenouille
+	 * @param d la direction de la grenouille
 	 */
-	public void deplaceOrdCar(Direction d){
-		environment.deplaceOrdCar(d);
+	public void deplaceOrdCar(Direction d, int var){
+		environment.deplaceOrdCar(d, 1);
 	}
 
 	/**
@@ -141,6 +159,8 @@ public class Game {
 		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
 		testLose();
 		testWin();
+		frog.faitGlisser();
+		//environment.isGlisse(frog.getPosition());
 	}
 
 }

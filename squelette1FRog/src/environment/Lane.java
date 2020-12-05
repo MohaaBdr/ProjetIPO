@@ -16,13 +16,10 @@ public class Lane {
 	private double density;
 	private int horloge = 0;
 
-
 	/**
 	 *
 	 * @param game la partie de jeu
-	 *
 	 * @param ordonnee l'ordonnée de la voie
-	 *
 	 * @param density la densité de la voie
 	 */
 	public Lane(Game game, int ordonnee, double density){
@@ -39,7 +36,7 @@ public class Lane {
 	}
 
 	/**
-	 * Deplace horizontalement les voitures et les retirent si besoin
+	 * déplace horizontalement les voitures et les retire si besoin
 	 * @param b
 	 */
 	public void deplaceCar(boolean b){
@@ -50,8 +47,8 @@ public class Lane {
 	}
 
 	/**
-	 * Deplace verticalement les voitures en fonction de la direction
-	 * @param d la direction
+	 * déplace verticalement les voitures en fonction de la direction
+	 * @param d
 	 */
 	public void deplaceOrdCar(Direction d){
 		for(Car car : this.cars){
@@ -67,7 +64,7 @@ public class Lane {
 	}
 
 	/**
-	 * Retire les voitures qui sont en dehors de la fenêtre de jeu
+	 * retire les voitures en dehors de la fenêtre de jeu
 	 */
 	public void enleveCar(){
 		for(Car c : cars){
@@ -78,11 +75,11 @@ public class Lane {
 	}
 
 	/**
-	 * Verifie une voiture est sur la case c
-	 * @param c la case
+	 * Verifie si une des voitures de la liste est sur la case c
+	 * @param c
 	 * @return
 	 */
-	public boolean isSafe(Case c) {   //verifie si une des voitures de la liste est sur la case c
+	public boolean isSafe(Case c) {
 		for (Car car : this.cars) {
 			if (car.verifCase(c)) {
 				return false;
@@ -124,8 +121,8 @@ public class Lane {
 
 	/**
 	 * Toutes les voitures se déplacent d'une case au bout d'un nombre "tic d'horloge" égal à leur vitesse
-	 * cette méthode est appelée à chaque tic d'horloge
-	 * Les voitures sont ajoutées à l'interface graphique même quand elles ne bougent pas
+	 * Notez que cette méthode est appelée à chaque tic d'horloge
+	 * Les voitures sont ajoutes a l interface graphique meme quand elles ne bougent pas
 	 * A chaque tic d'horloge, une voiture peut être ajoutée
 	 */
 	public void update() {
@@ -138,7 +135,6 @@ public class Lane {
 			horloge=0;
 
 		}
-
 	}
 
 }

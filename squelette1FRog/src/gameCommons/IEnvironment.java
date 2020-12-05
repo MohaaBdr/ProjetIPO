@@ -31,20 +31,28 @@ public interface IEnvironment {
 	public void update();
 
 	/**
-	 * Vide l'arrayList roadLines
-	 */
-	public void clearLanes();
-
-	/**
-	 * Ajoute une voie à l'arrayList roadLines
+	 * Ajoute une voie à l'arraylist RoadLines
 	 * Incrémente la valeur de la hauteur maximale atteinte
 	 */
-	public void infini();  //////////////////////TODO
+	public void infini();  /////////////////////TODO
 
 	/**
-	 * Incrémente ou décremente l'ordonnées des voies de roadLines en fonction de la direction
+	 * Incrémente ou décrémente l'ordonnée des voies de roadLines en fonction de d
 	 *
-	 * @param d la Direction de la grenouille
+	 * @param d la direction de la grenouille
 	 */
-	public void deplaceOrdCar(Direction d);  /////////////////////TODO
-}
+	public void deplaceOrdCar(Direction d, int var);  /////////////////////TODO
+
+	/**
+	 * Vide l'arraylist roadLines et des case spéciales
+	 */
+	public void clearEnv();
+
+	/**
+	 * Ajoute une case spéciale aux arraylist des cases spéciales
+	 */
+	public void infiniSpe();
+
+	public boolean isGlisse(Case c);
+
+	}

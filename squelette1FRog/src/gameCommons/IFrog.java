@@ -24,11 +24,12 @@ public interface IFrog {
 	public void move(Direction key);
 
 	/**
-	 * Retourne l'ordonnée de la grenouille par rapport à roadLines
-	 *
+	 * Donne l'ordonnée de la grenouille par rapport à roadLines
 	 * @return
 	 */
 	public int getCompteur();
+
+	public void faitGlisser();
 
 
 }
