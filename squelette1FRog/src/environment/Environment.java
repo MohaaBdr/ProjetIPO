@@ -85,24 +85,6 @@ public class Environment implements IEnvironment {
         }
     }
 
-    /**
-     * Effectue une �tape d'actualisation de l'environnement
-     */
-    @Override
-    public void update() {
-        for(Lane l : this.roadLines){
-            l.update();
-        }
-
-        for(Trap t : traps){
-            t.addToGraphics();
-        }
-
-        for(Glisse g : casesGlisse){
-            g.addToGraphics();
-        }
-    }
-
     @Override
     public void clearEnv (){
         this.traps.clear();
@@ -110,6 +92,7 @@ public class Environment implements IEnvironment {
         this.roadLines.clear();
     }
 
+    @Override
     public boolean isGlisse(Case c){
         for(Glisse g : casesGlisse){
             if(g.verifCase(c)){
@@ -118,6 +101,27 @@ public class Environment implements IEnvironment {
         }
         return false;
     }
+
+    /**
+     * Effectue une �tape d'actualisation de l'environnement
+     */
+    @Override
+    public void update() {
+        for(Glisse g : casesGlisse){
+        g.addToGraphics();
+        }
+        for(Trap t : traps){
+            t.addToGraphics();
+        }
+        for(Lane l : this.roadLines){
+            l.update();
+        }
+
+
+
+    }
+
+
 
     public void infini(){}  ////////////////TODO
 

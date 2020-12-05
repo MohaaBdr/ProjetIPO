@@ -50,16 +50,16 @@ public class Lane {
 	 * déplace verticalement les voitures en fonction de la direction
 	 * @param d
 	 */
-	public void deplaceOrdCar(Direction d){
+	public void deplaceOrdCar(Direction d, int var){
 		for(Car car : this.cars){
-			car.deplaceOrd(d);
+			car.deplaceOrd(d,var);
 		}
 		if(d == Direction.up) {
-			this.ord-=1;
+			this.ord-=var;
 
 		}
 		else {
-			this.ord+=1;
+			this.ord+=var;
 		}
 	}
 

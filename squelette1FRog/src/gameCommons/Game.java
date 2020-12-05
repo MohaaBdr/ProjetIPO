@@ -58,14 +58,7 @@ public class Game {
 		//this.trap = new Trap(this, new Case (3,2));
 	}
 
-	/**
-	 * Lie l'objet trap � la partie
-	 *
-	 * @param trap
-	 */
-	/*public void setTrap(Trap trap){
-		this.trap = trap;
-	}*/
+
 
 	/**
 	 * Lie l'objet frog � la partie
@@ -146,7 +139,7 @@ public class Game {
 	 * @param d la direction de la grenouille
 	 */
 	public void deplaceOrdCar(Direction d, int var){
-		environment.deplaceOrdCar(d, 1);
+		environment.deplaceOrdCar(d, var);
 	}
 
 	/**

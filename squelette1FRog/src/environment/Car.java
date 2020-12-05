@@ -81,12 +81,12 @@ public class Car {
      * Déplace verticalement une voiture en fonction de sa direction
      * @param d la direction choisie
      */
-    public void deplaceOrd(Direction d){
-        int sens;  //1 si de gauche vers le bas, -1 si vers le haut
+    public void deplaceOrd(Direction d, int var){
+        int sens;  //positif si vers le bas, negatif si vers le haut
         if(d == Direction.up){
-            sens = -1;
+            sens = -var;
         }else{
-            sens = 1;
+            sens = var;
         }
         this.leftPosition = new Case(this.leftPosition.absc, this.leftPosition.ord + (sens));
         this.addToGraphics();

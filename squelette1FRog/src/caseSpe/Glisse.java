@@ -30,12 +30,12 @@ public class Glisse implements CaseSpe{
     }
 
     @Override
-    public void deplaceOrd(Direction d){
+    public void deplaceOrd(Direction d, int var){
         int sens;  //1 si de gauche vers le bas, -1 si vers le haut
         if(d == Direction.up){
-            sens = -1;
+            sens = -var;
         }else{
-            sens = 1;
+            sens = var;
         }
         this.pos = new Case(this.pos.absc, this.pos.ord + (sens));
         this.addToGraphics();
