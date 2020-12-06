@@ -1,35 +1,35 @@
-package environment;
+package multijoueur.env;
 
 import java.util.ArrayList;
 
-import caseSpe.Bonus;
-import caseSpe.Glisse;
-import caseSpe.Spe;
-import caseSpe.Trap;
+import multijoueur.GameMulti;
+import multijoueur.spe.GlisseMulti;
+import multijoueur.spe.BonusMulti;
+import multijoueur.spe.SpeMulti;
+import multijoueur.spe.TrapMulti;
 import util.Case;
-import gameCommons.Game;
 import gameCommons.IEnvironment;
 import util.Direction;
 
-public class Environment implements IEnvironment {
+public class EnvMulti implements IEnvironment {
 
-    private ArrayList<Lane> roadLines;
-    private final Game game;
-    private ArrayList<Spe> casesSpe;
+    private ArrayList<LaneMulti> roadLines;
+    private final GameMulti game;
+    private ArrayList<SpeMulti> casesSpe;
     /**
      *
      * @param game la partie de jeu
      */
-    public Environment(Game game){
+    public EnvMulti(GameMulti game){
         this.game = game;
         this.roadLines = new ArrayList();
-        this.roadLines.add(new Lane(game, 0, 0.0D));
+        this.roadLines.add(new LaneMulti(game, 0, 0.0D));
 
         for(int i = 1; i < game.defaultHeight - 1; ++i) {
-            this.roadLines.add(new Lane(game, i,  (game.randomGen.nextInt(5)/100.0)+0.01));
+            this.roadLines.add(new LaneMulti(game, i,  (game.randomGen.nextInt(5)/100.0)+0.01));
         }
 
-        this.roadLines.add(new Lane(game, game.defaultHeight, 0.0D));
+        this.roadLines.add(new LaneMulti(game, game.defaultHeight, 0.0D));
 
         //ajout des cases spéciales
         /* les coordonnées des pièges sont enregistrés dans save, elles seront ensuite comparés avec celle des cases
@@ -41,7 +41,7 @@ public class Environment implements IEnvironment {
         int compt=0;
         for(int i=3; i < 7 + game.randomGen.nextInt(4); i++){
             save.add(new Case (game.randomGen.nextInt(game.width -1), game.randomGen.nextInt(game.defaultHeight -4) +3));
-            casesSpe.add(new Trap(game, save.get(compt)));
+            casesSpe.add(new TrapMulti(game, save.get(compt)));
             compt++;
         }
 
@@ -53,7 +53,7 @@ public class Environment implements IEnvironment {
                 }
             }
             save.add(test);
-            casesSpe.add(new Glisse(game, test));
+            casesSpe.add(new GlisseMulti(game, test));
         }
 
         for(int i=3; i < 7 + game.randomGen.nextInt(4); i++){
@@ -63,7 +63,7 @@ public class Environment implements IEnvironment {
                     test = new Case (game.randomGen.nextInt(game.width -1), game.randomGen.nextInt(game.defaultHeight -5) +3);
                 }
             }
-            casesSpe.add(new Bonus(game, test));
+            casesSpe.add(new BonusMulti(game, test));
         }
 
     }
@@ -78,8 +78,8 @@ public class Environment implements IEnvironment {
      */
     @Override
     public boolean isSafe(Case c, int compt) {
-        for(Spe s : casesSpe){
-            if (s.verifCase(c) && s instanceof Trap){
+        for(SpeMulti s : casesSpe){
+            if (s.verifCase(c) && s instanceof TrapMulti){
                 return false;
             }
         }
@@ -93,7 +93,7 @@ public class Environment implements IEnvironment {
      * @param c
      * @return vrai si la case est une case de victoire
      */
-   @Override
+    @Override
     public boolean isWinningPosition(Case c) {
         if(c.ord == game.defaultHeight-1){
             return true;
@@ -110,8 +110,8 @@ public class Environment implements IEnvironment {
 
     @Override
     public boolean isGlisse(Case c){
-        for(Spe s : casesSpe ){
-            if(s.verifCase(c) && s instanceof Glisse){
+        for(SpeMulti s : casesSpe ){
+            if(s.verifCase(c) && s instanceof GlisseMulti){
                 return true;
             }
         }
@@ -119,13 +119,13 @@ public class Environment implements IEnvironment {
     }
 
     public boolean isBonus(Case c){
-       for(int i= 0; i<casesSpe.size(); i++){
-           if(casesSpe.get(i).verifCase(c) && casesSpe.get(i) instanceof Bonus){
-               casesSpe.remove(i);
-               return true;
-           }
-       }
-       return false;
+        for(int i= 0; i<casesSpe.size(); i++){
+            if(casesSpe.get(i).verifCase(c) && casesSpe.get(i) instanceof BonusMulti){
+                casesSpe.remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -133,10 +133,10 @@ public class Environment implements IEnvironment {
      */
     @Override
     public void update() {
-        for(Spe s : casesSpe){
-        s.addToGraphics();
+        for(SpeMulti s : casesSpe){
+            s.addToGraphics();
         }
-        for(Lane l : this.roadLines){
+        for(LaneMulti l : this.roadLines){
             l.update();
         }
     }

@@ -15,7 +15,8 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 	private int pixelByCase = 16;
 	private int width;
 	private int height;
-	private IFrog frog;
+	private IFrog frog1;
+	private IFrog frog2;
 	private JFrame frame;
 
 	public FroggerGraphic(int width, int height) {
@@ -46,22 +47,35 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 	public void keyTyped(KeyEvent e) {
 	}
 
+
 	public void keyReleased(KeyEvent e) {
 	}
 
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:
-			frog.move(Direction.up);
+			frog1.move(Direction.up);
 			break;
 		case KeyEvent.VK_DOWN:
-			frog.move(Direction.down);
+			frog1.move(Direction.down);
 			break;
 		case KeyEvent.VK_LEFT:
-			frog.move(Direction.left);
+			frog1.move(Direction.left);
 			break;
 		case KeyEvent.VK_RIGHT:
-			frog.move(Direction.right);
+			frog1.move(Direction.right);
+			break;
+		case KeyEvent.VK_Z:
+			frog2.move2(Direction.up);
+			break;
+		case KeyEvent.VK_S:
+			frog2.move2(Direction.down);
+			break;
+		case KeyEvent.VK_Q:
+			frog2.move2(Direction.left);
+			break;
+		case KeyEvent.VK_D:
+			frog2.move2(Direction.right);
 		}
 	}
 
@@ -72,9 +86,12 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 	public void add(Element e) {
 		this.elementsToDisplay.add(e);
 	}
-
 	public void setFrog(IFrog frog) {
-		this.frog = frog;
+		this.frog1 = frog;
+	}
+	public void setFrog2(IFrog frog1, IFrog frog2) {
+		this.frog1 = frog1;
+		this.frog2 = frog2;
 	}
 
 	public void endGameScreen(String s) {

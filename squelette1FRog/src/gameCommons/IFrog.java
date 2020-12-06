@@ -16,12 +16,25 @@ public interface IFrog {
 	 * @return
 	 */
 	public Direction getDirection();
+
+
+	/**
+	 * reset l'ordonnée de la grenouille à 0 et à l'abscisse x
+	 * @param x
+	 */
+	public void resetPos(int x);
 	
 	/**
 	 * D�place la grenouille dans la direction donn�e et teste la fin de partie
 	 * @param key
 	 */
 	public void move(Direction key);
+
+	/**
+	 * D�place la grenouille du joueur 2 dans la direction donn�e et teste la fin de partie
+	 * @param key
+	 */
+	public void move2(Direction key);
 
 	/**
 	 * Donne l'ordonnée de la grenouille par rapport à roadLines
@@ -33,6 +46,11 @@ public interface IFrog {
 	 * Fait glisser la grenouille
 	 */
 	public void faitGlisser();
+
+	/**
+	 * Fait glisser la grenouille 2
+	 */
+	public void faitGlisser2();
 
 
 }

@@ -29,7 +29,6 @@ public class Game {
 	// Lien aux objets utilis�s
 	private IEnvironment environment;
 	public IFrog frog;
-	//private FrogInf frogInf;
 	private IFroggerGraphics graphic;
 	public Trap trap;
 
@@ -91,7 +90,7 @@ public class Game {
 	 * @return true si le partie est perdue
 	 */
 	public boolean testLose() {
-		if(!environment.isSafe(frog.getPosition(), frog.getCompteur())){
+		if((!environment.isSafe(frog.getPosition(), frog.getCompteur()))){
 			environment.clearEnv();
 			long f = System.nanoTime();
 			long temps =  (f - timer)/1000000000;

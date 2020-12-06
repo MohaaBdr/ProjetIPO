@@ -15,10 +15,10 @@ public class Frog implements IFrog {
 	 *
 	 * @param game la partie de jeu
 	 */
-	public Frog(Game game){
+	public Frog(Game game) {
 		this.game = game;
 		this.direction = Direction.up;
-		this.position = new Case(game.width/2, 0);
+		this.position = new Case(game.width / 2, 0);
 	}
 
 
@@ -41,8 +41,18 @@ public class Frog implements IFrog {
 		if (game.isGlisse(position)) {
 			Case newPos = new Case(position.absc, position.ord + 2);
 			position = newPos;
+
+			if(this.game.height>=this.game.maxHeight) {
+				game.maxHeight+=2;
+			}
+			else if (this.game.height>=this.game.maxHeight-1) {
+				game.maxHeight+=1;
+			}
+			game.height+=2;
 		}
 	}
+
+
 
 
 	@Override
@@ -66,4 +76,13 @@ public class Frog implements IFrog {
 			position = newPos;
 		}
 	}
+
+	@Override
+	public void move2(Direction key){}
+
+	@Override
+	public void resetPos(int x){}
+
+	@Override
+	public void faitGlisser2(){}
 }
