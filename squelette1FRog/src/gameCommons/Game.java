@@ -167,9 +167,10 @@ public class Game {
 		environment.update();
 		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
 		isBonus(frog.getPosition());
+		frog.faitGlisser();
 		testLose();
 		testWin();
-		frog.faitGlisser();
+
 	}
 
 }

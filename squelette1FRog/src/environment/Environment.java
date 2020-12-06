@@ -26,7 +26,7 @@ public class Environment implements IEnvironment {
         this.roadLines.add(new Lane(game, 0, 0.0D));
 
         for(int i = 1; i < game.defaultHeight - 1; ++i) {
-            this.roadLines.add(new Lane(game, i,  (game.randomGen.nextInt(5)/100.0)+0.01));
+            this.roadLines.add(new Lane(game, i,  (game.randomGen.nextInt(10)/100.0)+0.05));
         }
 
         this.roadLines.add(new Lane(game, game.defaultHeight, 0.0D));

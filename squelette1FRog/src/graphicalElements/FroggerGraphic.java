@@ -86,6 +86,7 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 	public void add(Element e) {
 		this.elementsToDisplay.add(e);
 	}
+
 	public void setFrog(IFrog frog) {
 		this.frog1 = frog;
 	}
@@ -97,12 +98,42 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 	public void endGameScreen(String s) {
 		frame.remove(this);
 		JLabel label = new JLabel(s);
-		label.setFont(new Font("Verdana", 1, 15));
+		label.setFont(new Font("Verdana", 1, 13));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setSize(this.getSize());
 		frame.getContentPane().add(label);
 		frame.repaint();
 
+	}
+
+
+	public void endGameScreen2(String s1, String s2, String s3, String s4) {
+		frame.remove(this);
+		JLabel label1 = new JLabel(s1);
+		label1.setFont(new Font("Verdana", 1, 15));
+		label1.setLocation(145, height/2 -40);
+		label1.setSize(this.getSize());
+
+		JLabel label2 = new JLabel(s2);
+		label2.setFont(new Font("Verdana", 1, 15));
+		label2.setLocation(140, height/2-20);
+		label2.setSize(this.getSize());
+
+		JLabel label3 = new JLabel(s3);
+		label3.setFont(new Font("Verdana", 1, 15));
+		label3.setLocation(140, height/2);
+		label3.setSize(this.getSize());
+
+		JLabel label4 = new JLabel(s4);
+		label4.setFont(new Font("Verdana", 1, 15));
+		label4.setLocation(165, height/2 + 20);
+		label4.setSize(this.getSize());
+
+		frame.getContentPane().add(label1);
+		frame.getContentPane().add(label2);
+		frame.getContentPane().add(label3);
+		frame.getContentPane().add(label4);
+		frame.repaint();
 	}
 
 }

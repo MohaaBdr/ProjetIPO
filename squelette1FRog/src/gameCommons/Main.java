@@ -27,7 +27,7 @@ public class Main {
 		int minSpeedInTimerLoops = 3;
 		double defaultDensity = 0.2;
 
-//Caractérisques du menu
+       //Caractérisques du menu
 		int modeJeu = 0;
 		int choix;
 		int saisie = 0;

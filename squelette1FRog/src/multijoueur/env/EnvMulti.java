@@ -26,7 +26,7 @@ public class EnvMulti implements IEnvironment {
         this.roadLines.add(new LaneMulti(game, 0, 0.0D));
 
         for(int i = 1; i < game.defaultHeight - 1; ++i) {
-            this.roadLines.add(new LaneMulti(game, i,  (game.randomGen.nextInt(5)/100.0)+0.01));
+            this.roadLines.add(new LaneMulti(game, i,  (game.randomGen.nextInt(10)/100.0)+0.05));
         }
 
         this.roadLines.add(new LaneMulti(game, game.defaultHeight, 0.0D));

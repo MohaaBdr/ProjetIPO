@@ -188,23 +188,12 @@ public class GameMulti {
             environment.clearEnv();
             score1 += bonus1;
             score2 += bonus2;
-            if(testWin1()) graphic.endGameScreen("Victoire J1 ! " + "Score : " + score1 + " /  Score J2 : " +score2 + " temps : " + temps1 + " secs");
-            if(testWin2()) graphic.endGameScreen("Victoire J2 ! " + "Score : " + score2 + " /  Score J1 : " +score1 + " temps : " + temps2 + " secs");
+            if(testWin1()) graphic.endGameScreen2("Victoire Joueur1 !", "Score Joueur1 : "  + score1, " Score Joueur2 : "+ score2, "temps : "+ temps1 + "s");
+            if(testWin2()) graphic.endGameScreen2("Victoire Joueur2 !", "Score Joueur2 : "  + score2, " Score Joueur1 : "+ score1, "temps : "+ temps2 + "s");
             return true;
         }
         return false;
     }
-
-    /**
-     * Ajoute une voie à l'arraylist RoadLines
-     * Ajoute une case spéciale
-     * Incrémente la valeur de la hauteur maximale atteinte
-     */
-    public void infini(){
-        this.environment.infini();
-        this.environment.infiniSpe();
-    }
-
     /**
      * Teste si une case est glissante
      *
@@ -215,14 +204,6 @@ public class GameMulti {
         return environment.isGlisse(c);
     }
 
-    /**
-     * Incrémente ou décrémente l'ordonnée des voies de roadLines en fonction de d
-     *
-     * @param d la direction de la grenouille
-     */
-    public void deplaceOrdCar(Direction d, int var){
-        environment.deplaceOrdCar(d, var);
-    }
 
     /**
      * Actualise l'environnement, affiche la grenouille et verifie la fin de
@@ -235,11 +216,11 @@ public class GameMulti {
         this.graphic.add(new Element(frog2.getPosition(), Color.CYAN));
         isBonus1(frog1.getPosition());
         isBonus2(frog2.getPosition());
+        frog1.faitGlisser();
+        frog2.faitGlisser2();
         testLose1();
         testLose2();
         testWin();
-        frog1.faitGlisser();
-        frog2.faitGlisser2();
     }
 
 }

@@ -22,11 +22,15 @@ public interface IFroggerGraphics {
     
     /**
      * Lie la grenouille � l'environneemnt graphique
-     * @param frog1
-     * @param frog2
+     * @param frog
      */
     public void setFrog(IFrog frog);
 
+    /**
+     * Lie les grenouilles � l'environneemnt graphique
+     * @param frog1
+     * @param frog2
+     */
     public void setFrog2(IFrog frog1, IFrog frog2);
 
     /**
@@ -34,4 +38,14 @@ public interface IFroggerGraphics {
      * @param message le texte � afficher
      */
     public void endGameScreen(String message);
+
+    /**
+     * Lance un �cran de fin de partie
+     * @param message1
+     * @param message2
+     * @param message3
+     * @param message4
+     */
+    public void endGameScreen2(String message1, String message2, String message3, String message4);
+
 }
